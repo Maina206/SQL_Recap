@@ -1,0 +1,137 @@
+-- create the database
+-- CREATE DATABASE IF NOT EXISTS Trial2;
+
+-- view the database/confirm it's created 
+-- SHOW DATABASES;
+
+-- navigate to the database 
+-- USE Trial2;
+
+-- confirm if the database has tables 
+-- SHOW TABLES;
+
+
+
+-- create columns for the table 
+-- CREATE TABLE students (
+--     student_id INT PRIMARY KEY AUTO_INCREMENT,
+--     first_name VARCHAR(50) NOT NULL,
+--     last_name VARCHAR(50) NOT NULL,
+--     email VARCHAR(100) UNIQUE NOT NULL,
+--     date_of_birth DATE,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+
+-- SHOW TABLES;
+
+
+
+-- Create Subjects table
+-- CREATE TABLE subjects (
+--     subject_id INT PRIMARY KEY AUTO_INCREMENT,
+--     subject_name VARCHAR(100) NOT NULL,
+--     subject_code VARCHAR(20) UNIQUE NOT NULL,
+--     credits INT NOT NULL,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+
+-- SHOW TABLES;
+
+-- Create junction table for many-to-many relationship
+-- CREATE TABLE student_subjects (
+--     student_id INT,
+--     subject_id INT,
+--     FOREIGN KEY (student_id) REFERENCES students(student_id),
+--     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id),
+--     PRIMARY KEY (student_id, subject_id)
+-- );
+
+-- SHOW TABLES;
+
+-- SELECT * FROM students;
+
+-- Insert sample students
+-- INSERT INTO students (first_name, last_name, email, date_of_birth) VALUES
+-- ('John', 'Doe', 'john.doe@email.com', '2000-05-15'),
+-- ('Jane', 'Smith', 'jane.smith@email.com', '2001-03-22'),
+-- ('Michael', 'Johnson', 'michael.j@email.com', '2000-11-30'),
+-- ('Sarah', 'Williams', 'sarah.w@email.com', '2001-07-18'),
+-- ('Robert', 'Brown', 'robert.b@email.com', '2000-09-25');
+
+-- SELECT * FROM students;
+-- Insert sample subjects
+-- INSERT INTO subjects (subject_name, subject_code, credits) VALUES
+-- ('Mathematics', 'MATH101', 3),
+-- ('Physics', 'PHYS101', 4),
+-- ('Computer Science', 'CS101', 4),
+-- ('English Literature', 'ENG101', 3),
+-- ('Chemistry', 'CHEM101', 4);
+
+-- SELECT * FROM subjects;
+
+-- Enroll students in subjects with sample grades
+-- INSERT INTO student_subjects (student_id, subject_id) VALUES
+-- (1, 1),
+-- (1, 2),
+-- (1, 3),
+-- (2, 1),
+-- (2, 4),
+-- (3, 2),
+-- (3, 3),
+-- (4, 4),
+-- (4, 5),
+-- (5, 1),
+-- (5, 5);
+
+-- INSERT INTO students (first_name, last_name, email, date_of_birth) 
+-- VALUES ('Alice', 'Green', 'alice.green@email.com', '2002-08-12');
+
+-- INSERT INTO student_subjects (student_id, subject_id) VALUES 
+-- (6, 1);
+
+-- UPDATE Trial2.students 
+-- SET email = 'alice.new@email.com' 
+-- WHERE student_id = 6;
+
+-- UPDATE Trial2.student_subjects 
+-- SET subject_id = 4 
+-- WHERE student_id = 6 AND subject_id = 1;
+
+
+-- SELECT * FROM student_subjects;
+-- WHERE student_id = 1;
+
+-- DELETE FROM student_subjects WHERE student_id = 6;
+-- DELETE FROM students WHERE student_id = 6;
+
+-- RENAME TABLE students_info TO students;
+
+-- SELECT COUNT(*) AS total_students FROM Trial2.students;
+
+-- SELECT COUNT(*) AS students_born_after_2000 FROM students 
+-- WHERE date_of_birth > '2001-01-01';
+
+
+-- SELECT students.email, subjects.subject_name 
+-- FROM students
+-- INNER JOIN student_subjects ON students.student_id = student_subjects.student_id
+-- INNER JOIN subjects ON student_subjects.subject_id = subjects.subject_id;
+
+-- SELECT students.first_name, subjects.subject_name 
+-- FROM students
+-- LEFT JOIN student_subjects ON students.student_id = student_subjects.student_id
+-- LEFT JOIN subjects ON student_subjects.subject_id = subjects.subject_id;
+
+-- SELECT students.first_name, subjects.subject_name 
+-- FROM students
+-- RIGHT JOIN student_subjects ON students.student_id = student_subjects.student_id
+-- RIGHT JOIN subjects ON student_subjects.subject_id = subjects.subject_id;
+
+
+-- SHOW TABLES;
+-- SELECT * FROM students;
+
+-- SELECT * FROM subjects;
+
+
+
